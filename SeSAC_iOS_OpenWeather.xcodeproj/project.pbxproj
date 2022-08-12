@@ -14,6 +14,7 @@
 		14C1B10E28A6C7FF00925A05 /* OpenWeather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C1B10D28A6C7FF00925A05 /* OpenWeather.storyboard */; };
 		14C1B11028A6C81600925A05 /* OpenWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1B10F28A6C81600925A05 /* OpenWeatherViewController.swift */; };
 		14C1B11228A6C8F100925A05 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 14C1B11128A6C8F100925A05 /* .gitignore */; };
+		14C1B11528A6C93700925A05 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1B11428A6C93700925A05 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		14C1B10D28A6C7FF00925A05 /* OpenWeather.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenWeather.storyboard; sourceTree = "<group>"; };
 		14C1B10F28A6C81600925A05 /* OpenWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherViewController.swift; sourceTree = "<group>"; };
 		14C1B11128A6C8F100925A05 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		14C1B11428A6C93700925A05 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		14C1B11328A6C91B00925A05 /* Key */ = {
 			isa = PBXGroup;
 			children = (
+				14C1B11428A6C93700925A05 /* APIKey.swift */,
 			);
 			path = Key;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			files = (
 				14C1B0FA28A6C4A100925A05 /* AppDelegate.swift in Sources */,
 				14C1B0FC28A6C4A100925A05 /* SceneDelegate.swift in Sources */,
+				14C1B11528A6C93700925A05 /* APIKey.swift in Sources */,
 				14C1B11028A6C81600925A05 /* OpenWeatherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
