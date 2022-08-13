@@ -7,18 +7,27 @@ import Kingfisher
 
 class OpenWeatherViewController: UIViewController {
     
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel! //습도 %
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var feelsLikeTempLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     
+    @IBOutlet var labelBackgroundViewlist: [UIView]!
+    @IBOutlet var weatherLabelList: [UILabel]!
+    
     let locationManager = CLLocationManager()
     var wheaterData: Weather?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout()
+        currentTime()
+        
         locationManager.delegate = self
+        
         
     }
         
@@ -37,6 +46,35 @@ class OpenWeatherViewController: UIViewController {
         present(requestLocationServiceAlert, animated: true, completion: nil)
     }
 
+    func layout() {
+        for count in 0...labelBackgroundViewlist.count - 1 {
+            labelBackgroundViewlist[count].backgroundColor = .white
+            labelBackgroundViewlist[count].layer.cornerRadius = 7
+        }
+        
+        for count in 0...weatherLabelList.count - 1 {
+            weatherLabelList[count].text = "위치 서비스가 꺼져 있음"
+        }
+        
+        locationLabel.font = .systemFont(ofSize: 28)
+        dateLabel.font = .systemFont(ofSize: 13)
+        tempLabel.font = .systemFont(ofSize: 15)
+        humidityLabel.font = .systemFont(ofSize: 15)
+        windSpeedLabel.font = .systemFont(ofSize: 15)
+        feelsLikeTempLabel.font = .systemFont(ofSize: 15)
+        iconImageView.backgroundColor = .white
+        iconImageView.layer.cornerRadius = 7
+    }
+    
+    func currentTime() {
+        let date = DateFormatter()
+        date.dateFormat = "M월 dd일 hh시 mm분"
+        date.locale = Locale(identifier: "ko_KR")
+        
+        let currentDate = Date()
+        dateLabel.text = date.string(from: currentDate)
+        
+    }
 }
 //MARK: - 위치 서비스 관련 메소드
 extension OpenWeatherViewController {
@@ -95,8 +133,12 @@ extension OpenWeatherViewController: CLLocationManagerDelegate {
         
         
         if let coodinate = locations.last?.coordinate {
-            print("현재 위치 x 좌표 = \(coodinate.latitude)")
-            print("현재 위치 y 좌표 = \(coodinate.longitude)")
+            print("현재 위치 latitude 좌표 = \(coodinate.latitude)")
+            print("현재 위치 longitude 좌표 = \(coodinate.longitude)")
+            
+            OpenWeatherAPIManager.shared.requestCity(lat: coodinate.latitude, lon: coodinate.longitude) { value in
+                self.locationLabel.text = value
+            }
             
             OpenWeatherAPIManager.shared.requestOpenWeather(lat: coodinate.latitude, lon: coodinate.longitude) { [self] value in
                 self.wheaterData = value
@@ -107,12 +149,20 @@ extension OpenWeatherViewController: CLLocationManagerDelegate {
                 let fellsLikeTemp = String(format: "%.f", wheaterData.feelsLikeTemp - 273.15)
                 let humidity = wheaterData.humidity
                 let windSpeed = String(format: "%.1f", wheaterData.windSpeed)
+                let iconUrl = "\(EndPoint.icodnURL)/\(wheaterData.icon)@2x.png"
+                let url = URL(string: iconUrl)
                 
-                self.tempLabel.text = "지금은 \(temp)℃에요."
-                self.feelsLikeTempLabel.text = "체감온도는 \(fellsLikeTemp)℃에요."
-                self.humidityLabel.text = "\(humidity)% 만큼 습해요."
-                self.windSpeedLabel.text = "\(windSpeed)m/s의 바람이 불고 있어요."
+                self.tempLabel.text = "지금은 \(temp)℃에요"
+                self.feelsLikeTempLabel.text = "체감온도는 \(fellsLikeTemp)℃에요"
+                self.humidityLabel.text = "\(humidity)% 만큼 습해요"
+                self.windSpeedLabel.text = "\(windSpeed)m/s의 바람이 불고 있어요"
+                self.iconImageView.kf.setImage(with: url)
             }
+            
+//            OpenWeatherAPIManager.shared.requestCityName(lat: coodinate.latitude, lon: coodinate.longitude) { value in
+//                
+//                self.locationLabel.text = value
+//            }
         }
         
         locationManager.stopUpdatingLocation()

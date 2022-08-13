@@ -20,7 +20,9 @@ class OpenWeatherAPIManager {
                 print("JSON: \(json)")
                 print("=============")
                 
-                let value = Weather(temp: json["main"]["temp"].doubleValue, feelsLikeTemp: json["main"]["feels_like"].doubleValue, humidity: json["main"]["humidity"].intValue, windSpeed: json["wind"]["speed"].doubleValue)
+                let value = Weather(temp: json["main"]["temp"].doubleValue, feelsLikeTemp: json["main"]["feels_like"].doubleValue, humidity: json["main"]["humidity"].intValue, windSpeed: json["wind"]["speed"].doubleValue, icon: json["weather"][0]["icon"].stringValue)
+                
+                dump(value)
                 
                 completionHandler(value)
                 
@@ -30,14 +32,38 @@ class OpenWeatherAPIManager {
         }
     }
     
-    func requestCityName(lat: CLLocationDegrees, lon: CLLocationDegrees) {
-        let url = "http://api.openweathermap.org/geo/1.0/reverse?lat=\(lat)&lon=\(lon)&appid=\(APIKey.OepnWeather)"
-        AF.request(url, method: .get).validate().responseJSON { response in
+//    func requestCityName(lat: CLLocationDegrees, lon: CLLocationDegrees, completionHander: @escaping (String) -> ()) {
+//        let url = "http://api.openweathermap.org/geo/1.0/reverse?lat=\(lat)&lon=\(lon)&appid=\(APIKey.OepnWeather)"
+//        AF.request(url, method: .get).validate().responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                print("JSON: \(json)")
+//
+//                let value = json[0]["local_names"]["ko"].stringValue
+//                print("=============")
+//
+//                completionHander(value)
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+    
+    func requestCity(lat: CLLocationDegrees, lon: CLLocationDegrees, completionHandler: @escaping (String) -> ()) {
+    
+        let url = "\(EndPoint.KaKaoURL)?x=\(lon)&y=\(lat)"
+        let header: HTTPHeaders = ["Authorization": "KakaoAK \(APIKey.KakaoRESTAPI)"]
+        AF.request(url, method: .get , headers: header).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 print("JSON: \(json)")
-                print("=============")
+                
+                let value = json["documents"][0]["address_name"].stringValue
+                
+                completionHandler(value)
                 
             case .failure(let error):
                 print(error)

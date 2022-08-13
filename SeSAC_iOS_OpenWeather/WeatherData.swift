@@ -5,4 +5,5 @@ struct Weather {
     let feelsLikeTemp: Double
     let humidity: Int
     let windSpeed: Double
+    let icon: String
 }
