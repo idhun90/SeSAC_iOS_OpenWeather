@@ -7,11 +7,19 @@ import Kingfisher
 
 class OpenWeatherViewController: UIViewController {
     
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel! //습도 %
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var feelsLikeTempLabel: UILabel!
+    @IBOutlet weak var iconImageView: UIImageView!
+    
     let locationManager = CLLocationManager()
+    var wheaterData: Weather?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
+        
     }
         
     func showRequestLocationServiceAlert() {
@@ -30,7 +38,7 @@ class OpenWeatherViewController: UIViewController {
     }
 
 }
-//MARK: - 관련 메소드
+//MARK: - 위치 서비스 관련 메소드
 extension OpenWeatherViewController {
     
     //MARK: 위치 서비스 활성화 체크
@@ -84,6 +92,29 @@ extension OpenWeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(#function, "-> 사용자 위치를 가져왔습니다.")
+        
+        
+        if let coodinate = locations.last?.coordinate {
+            print("현재 위치 x 좌표 = \(coodinate.latitude)")
+            print("현재 위치 y 좌표 = \(coodinate.longitude)")
+            
+            OpenWeatherAPIManager.shared.requestOpenWeather(lat: coodinate.latitude, lon: coodinate.longitude) { [self] value in
+                self.wheaterData = value
+                
+                guard let wheaterData = self.wheaterData else { return }
+                
+                let temp = String(format: "%.f", wheaterData.temp - 273.15)
+                let fellsLikeTemp = String(format: "%.f", wheaterData.feelsLikeTemp - 273.15)
+                let humidity = wheaterData.humidity
+                let windSpeed = String(format: "%.1f", wheaterData.windSpeed)
+                
+                self.tempLabel.text = "지금은 \(temp)℃에요."
+                self.feelsLikeTempLabel.text = "체감온도는 \(fellsLikeTemp)℃에요."
+                self.humidityLabel.text = "\(humidity)% 만큼 습해요."
+                self.windSpeedLabel.text = "\(windSpeed)m/s의 바람이 불고 있어요."
+            }
+        }
+        
         locationManager.stopUpdatingLocation()
         
     }

@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141FA60228A797B9008DA997 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FA60128A797B9008DA997 /* WeatherData.swift */; };
 		145A6B6E28A76C100028A273 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 145A6B6D28A76C100028A273 /* Alamofire */; };
 		145A6B7128A76C1E0028A273 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 145A6B7028A76C1E0028A273 /* SwiftyJSON */; };
 		145A6B7428A76C2C0028A273 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 145A6B7328A76C2C0028A273 /* Kingfisher */; };
+		145A6B7628A789690028A273 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A6B7528A789690028A273 /* APIManager.swift */; };
+		145A6B7828A78A5A0028A273 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145A6B7728A78A5A0028A273 /* Constant.swift */; };
 		14C1B0FA28A6C4A100925A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1B0F928A6C4A100925A05 /* AppDelegate.swift */; };
 		14C1B0FC28A6C4A100925A05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1B0FB28A6C4A100925A05 /* SceneDelegate.swift */; };
 		14C1B10328A6C4A300925A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14C1B10228A6C4A300925A05 /* Assets.xcassets */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		141FA60128A797B9008DA997 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		145A6B7528A789690028A273 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		145A6B7728A78A5A0028A273 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		14C1B0F628A6C4A100925A05 /* SeSAC_iOS_OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_iOS_OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C1B0F928A6C4A100925A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C1B0FB28A6C4A100925A05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +76,8 @@
 				14C1B11328A6C91B00925A05 /* Key */,
 				14C1B0F928A6C4A100925A05 /* AppDelegate.swift */,
 				14C1B0FB28A6C4A100925A05 /* SceneDelegate.swift */,
+				145A6B7528A789690028A273 /* APIManager.swift */,
+				141FA60128A797B9008DA997 /* WeatherData.swift */,
 				14C1B10D28A6C7FF00925A05 /* OpenWeather.storyboard */,
 				14C1B10F28A6C81600925A05 /* OpenWeatherViewController.swift */,
 				14C1B10228A6C4A300925A05 /* Assets.xcassets */,
@@ -82,6 +90,7 @@
 		14C1B11328A6C91B00925A05 /* Key */ = {
 			isa = PBXGroup;
 			children = (
+				145A6B7728A78A5A0028A273 /* Constant.swift */,
 				14C1B11428A6C93700925A05 /* APIKey.swift */,
 			);
 			path = Key;
@@ -171,8 +180,11 @@
 			files = (
 				14C1B0FA28A6C4A100925A05 /* AppDelegate.swift in Sources */,
 				14C1B0FC28A6C4A100925A05 /* SceneDelegate.swift in Sources */,
+				141FA60228A797B9008DA997 /* WeatherData.swift in Sources */,
+				145A6B7628A789690028A273 /* APIManager.swift in Sources */,
 				14C1B11528A6C93700925A05 /* APIKey.swift in Sources */,
 				14C1B11028A6C81600925A05 /* OpenWeatherViewController.swift in Sources */,
+				145A6B7828A78A5A0028A273 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +323,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7CR6X9MD8C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_iOS_OpenWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -338,6 +351,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7CR6X9MD8C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_iOS_OpenWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
